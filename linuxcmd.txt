@@ -1,0 +1,95 @@
+ man
+ls
+ls -t 
+ls 1
+ls -1  
+Display File Size in Human Readable Format Using ls -lh
+. Display Directory Information Using ls -ld
+cp
+mv
+touch
+If file.txt exists, touch updates its access and modification times to the current time.
+ If file.txt doesn't exist, it is created as a new, empty file.
+rm
+tar
+pwd
+ifconfig
+locate
+ping
+chmod
+15 chmod
+
+The chmod command. The chmod command comes from "Change Mode" back to the unix times. It's a great command to restrict access to directories or files. But before i show you an example on how to use it, some theory.
+
+Chmod is qiet an advanced command to use. So therefore you really need to understand how it works.
+chmod works with so called persmission bits. These bits can be set to a certain level of restrictions.
+
+We have the following bits available:
+7 	full
+6 	read and write
+5 	read and execute
+4 	read only
+3 	write and execute
+2 	write only
+1 	execute only
+0 	none
+
+source: http://en.wikipedia.org/wiki/Chmod
+
+ 
+
+The bits shown above are the permissions for a particular group or class.
+
+Files or directories contain four classes:
+
+1st: The owner itself
+2nd: Member of the file group
+3rd: Others
+4th: All of the above
+
+To set the right permission bits the a particular group or class it is very important to select to right amount of permission bits.
+
+for example, i will create a file and protect this file for being modified by anyone else besides me. Also will i protect the file for being deleted.
+
+This is how i do it: chmod 400 mijndagboek
+
+In this command i gave up the 4 bit in the "members of the group" 0 to others and 0 to all.
+
+Now not even me is able to delete the file anymore without using the sudo command.
+
+But.. there is more. The classes i talked about earlier are devided into three seperate like actions.. those are:
+
+    Read
+    Write
+    Execute
+
+In order to add very specific restrictions to a file or folder you can use a trick to do that. I will show you how.
+
+If we want to restrict access to a file without knowing the exact bit number we can do the following.
+
+RWX = 7 Which is the permission bit of Read, Write, and Execture together.
+
+Seperating these bits gives us the following values individually:
+
+Read = 4 bits.
+Write = 2 bits.
+Exec = 1 bit.
+ 
+
+So we have 3 groups to take care of (the first group which is the owner is optional in chmod)
+
+[membersgroupbit],[others],[alloftheabove]
+
+if we want to give everyone, and i mean everyone access to the directory i can do:
+
+chmod 777 mijndagboek
+
+[read=4+Write=2+Execute=1=7],[read=4+Write=2+Execute=1=7],[read=4+Write=2+Execute=1=7]
+
+This is not good!
+
+We want to restrict the access for the file offcourse so a better chmod would be:
+
+chmod 700
+
+[read=4+Write=2+Execute=1],[0][0] 
